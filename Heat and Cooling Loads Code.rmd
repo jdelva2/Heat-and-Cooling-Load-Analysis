@@ -1,0 +1,464 @@
+---
+title: "Group Project"
+author: "Jeff Weinberg,Jose Luis Del Valle Jr, Dione David"
+date: "4/24/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_knit$set(root.dir= "C:/Users/jawei/Documents/382/Datasets") 
+```
+
+
+
+##Introduction
+In this section, explain briefly the purpose of your analysis and the reason that inspires you. Identify your hypothesis, and in a single sentence refer to the results of your work.
+
+The purpose of this analysis is to predict both heating load and cooling load of a house -- in seperate models -- via the features of the house. The results of our work will help builders reduce housing and cooling load's of home's in the future. 
+
+
+##Data
+For the Framework , we used the "readxl" library to read the xlsx file and converted it to a data frame. The column names initially ranged from X1 to X8 with Y1 and Y2. We changed the column names to represtened each variable, column indications were pulled from the webpage https://archive.ics.uci.edu/ml/datasets/Energy+efficiency. 
+
+##Literature Review 
+
+https://github.com/njoaquinacosta/Linear-Regression-Energy-Efficiency/blob/master/Linear%20Regression-Energy%20Efficiency.ipynb
+http://www.ibpsa.org/proceedings/BS2011/P_1563.pdf
+https://www.researchgate.net/publication/317565533_THE_CORRELATION_BETWEEN_BUILDING_SHAPE_AND_BUILDING_ENERGY_PERFORMANCE
+https://www.new-learn.info/packages/clear/thermal/buildings/building_fabric/heat_transfer/heat_loss.html
+https://www.marincounty.org/~/media/Files/Departments/CD/Planning/CurrentPlanning/Publications/FactSheets/FloorArea_FS.pdf
+
+#We found the following studies which used the same data to map heating and cooling load. We completed our analysis without use of these publications.
+
+#1)	Set your hypothesis, have a specific goal.
+We hypothesize that house features will be statistically significant predictors of both cooling load and heating load. Our goal is to map out heating load and cooling load and be able to provide the public with a model which predicts cooling-load and heating-load of homes given their features.   
+
+
+#2)	Review your data to ensure that they are appropriate and complete and can help you prove or disprove your hypothesis.
+
+
+#3)	Complete literature review on the subject/hypothesis and determine if there is any relevant research/study has been already completed. Study the literature and include citations in your final report.
+
+Define the following terms:
+Relative compactness: The Relative compactness of a shape is derived in that its volume to surface ratio is compared to that of the most compact shape with the same volume.
+
+Surface Area: The sum of the floor area of all floors in the building. 
+Wall Area : Total area of all wall space
+Roof Area: Total area of the roofs on all floors
+Overall Height: Vertical Height of the building
+Orientation : Building orientation is the practice of facing a building so as to maximize certain aspects of its surroundings
+Glazing Area: The nominal area or rough opening is also acceptable for flat windows and doors.
+Heating Load: The heating efficiency of the building and its capacity to maintain it
+Cooling Load: The cooling efficiency of the building and its capacity to maintain it
+
+NOTE: Beause Orientation indicates direction of the building, it is seen as a treatment and was therefore converted to a factor. The section of code "my_data$Orientation  <- as.factor(my_data$Orientation)" converted our Orientation variable to a factor. This variable is excluded from numerical analysis. 
+
+```{r Framework, echo=FALSE}
+library('readxl')
+library("ggpubr")
+
+my_data <- read_excel("ENB2012.xlsx")
+
+my_data<-as.data.frame(my_data)
+
+#4)	Once you ensure that your data are sufficient and you can initially rely on them to run your modeling, clean them up.
+#unneccesary, data is already clean and ready to be used for analysis
+coln<- c("Relative_Compactness" , "Surface_Area", "Wall_Area","Roof_Area", "Overall_Height", "Orientation", "Glazing_Area", "Glazing_Area_Distribution", "Heating_Load", "Cooling_Load")
+
+colnames(my_data)<-coln
+my_data$Orientation  <- as.factor(my_data$Orientation)
+
+
+
+```
+#Exploratory Analysis
+
+-We explored the data for NA values by running the code "summary(is.na(my_data))"
+which searched for NA data in each column. The code returned a summary of the search for each column and 768 "FALSE" values -- meaning that for each column, there is no NA data. Moreover, we insure that there are no 0 values where there should not be by running the code "which(my_data[,c(1:5,7:10)]==0)". 
+
+-Next, we checked for outliers *without using a for-loop* by analyzing the columns of the data.frame with the boxplot.stats(my_data[,ix])$out method. 
+
+-We created a table of the Orientation values to find that each building Orientation was represented equally in the data. There are 192 of each building orientation. 
+
+-We then plot the boxplots of the data to gain a better understanding of their distributions.
+NOTE: the fourth and seventh variables appear to be skewed toward zero. The fifth variable presents significantly less entropy than any other variate with all of it's data residing within the IQR.
+
+-IQR values are calculated and stored.  *iqr.values<-matrix(nrow=1,ncol=10,0)*
+  *for(ix in c(1:5,7:10)){*
+  
+    *iqr.values[,ix]<-IQR(my_data[,ix])*
+ 
+  *}*
+*colnames(iqr.values)<-colnames(my_data)*
+  
+-Therein, we ran the pairs function to view correlation accross all variates.
+
+NOTE: Relative Compactness and Surface Area appear to have a high correlation, negatively. Heating load and Cooling load appear to have a high correlation, positively. Other variables, although we know that they are continuous across their own spectrums, appear to have been measured ordinally. This may effect modeling and the normality test. 
+
+-Normality tests ensued using the Shapiro-Wilk test and qqplotting. Normality was not found in any variables. A log transformation was then made, normality was still not found. 
+*Out of Curiousity:* For normality testing, data was cut via the respective IQRS of heating load and cooling load such that only the data within the IQRS of both variates would be tested for normality. Normality was still not found.
+
+NOTE: We proceeded with modeling under the assumption that with better measurements normality would be found within the variables. 
+
+-Each variable was then plotted with their index on the x-axis and value on the y-axis. Histograms were also made which showed skew on multiple variables. 
+
+```{r Exploratory Analysis, echo=FALSE}
+#1)	Run Exploratory analysis on at least 5 total variables where 2 of them are quantitative.
+#a.	Check for missing data
+summary(is.na(my_data))#there are no NA values
+print("There are no NA values")
+which(my_data[,c(1:5,7:10)]==0) #in each row where there shouldn't be 0 values, there are not 0 values
+print("There is no missing data")
+#b.	Check for outliers, IQR, and summarize the statistics.
+#forloop for summary statistics
+
+  boxplot.stats(my_data[,1])$out
+  boxplot.stats(my_data[,2])$out
+  boxplot.stats(my_data[,3])$out
+  boxplot.stats(my_data[,4])$out
+  boxplot.stats(my_data[,5])$out
+  boxplot.stats(my_data[,7])$out
+  boxplot.stats(my_data[,8])$out
+  boxplot.stats(my_data[,9])$out
+  boxplot.stats(my_data[,10])$out
+    #there are no outliers
+  addmargins(table(my_data$Orientation))
+  
+  #for loop can also work....
+  
+  par(mfrow=c(1,1),mar = c(1,1,1,1))
+    for(ix in c(1:5,7:10)){
+      boxplot(my_data[,ix],main = names(my_data[ix]))
+    }
+  
+  
+  iqr.values<-matrix(nrow=1,ncol=10,0)
+  for(ix in c(1:5,7:10)){
+  
+    iqr.values[,ix]<-IQR(my_data[,ix])
+ 
+  }
+colnames(iqr.values)<-colnames(my_data)
+  iqr.values
+  
+#c. 	Dissect your variables in a way that will help you with your analysis.
+  
+  pairs(my_data)#looking for visible correlations
+#notes...
+  #as relative compactness increases, surface area decresaes -- intuitively, this makes sense
+    
+    
+#d.	Determine the distribution ( if any that your data follow, experimentally and theoretically)
+ #create quantile plots to check for normality
+  #first, start with plots, we do not wish to check normality for discrete variables, only those which appear continuous
+  
+  
+  
+   for (ix in c(1:5,7:10)) {
+    qqnorm(my_data[,ix],main = names(my_data[ix]));qqline(my_data[,ix])
+  }
+  
+  for(ix in c(1:5,7:10)){
+    
+    x<-names(my_data)[ix]
+    cat("Normality test for ", x,sep = " ")
+  
+    z<-shapiro.test(my_data[,ix])
+    print(z)
+  }
+  
+  
+  
+  #no columns in the data are normal, we will do a log transformation of the dat later on
+  
+  for(ix in c(1:5,7:10)){
+    
+    x<-names(my_data)[ix]
+    cat("Normality test for log converted", x,sep = " ")
+  
+    z<-shapiro.test(log(my_data[,ix]))
+    print(z)
+  }
+  
+  #since normality does not apply even in log transformed data, try splitting data by the inner quartiles
+  
+#summary(my_data$Cooling_Load) #15.62-33.13
+#summary(my_data$Heating_Load)#12.99-31.67
+
+revised.cool_load.dat<-subset( my_data, my_data$Cooling_Load<=33.13 )
+revised.cool_load.dat<-subset(revised.cool_load.dat, revised.cool_load.dat$Cooling_Load>=15.62)
+
+revised.heat_load.dat<-subset( my_data, my_data$Heating_Load>=12.99 )
+revised.heat_load.dat<-subset(revised.heat_load.dat, revised.heat_load.dat$Heating_Load<=31.67)
+
+#Inside new dfs, check for normality among variables with shapiro-wilk test
+
+for(ix in c(1:5,7:10)){
+    
+    x<-names(revised.cool_load.dat)[ix]
+    cat("Normality test for Revised variables", x ,sep = " ")
+  
+    z<-shapiro.test((revised.cool_load.dat[,ix]))
+    print(z)
+}
+
+for(ix in c(1:5,7:10)){
+    
+    x<-names(revised.heat_load.dat)[ix]
+    cat("Normality test for Revised variables", x ,sep = " ")
+  
+    z<-shapiro.test((revised.heat_load.dat[,ix]))
+    print(z)
+  }
+
+
+
+#NOTE: normality is not apparent in any variables, we will proceed as if it were and we recognize that it is not
+
+
+#e.	Show your analysis in both tables/charts and visually ( histograms, qqnorm plots, boxplots etc…)
+ for(ix in c(1:5,7:10)){
+    plot(my_data[,ix],main = names(my_data[ix]))
+  }
+  
+  for(ix in c(1:5,7:10)){
+    hist(my_data[,ix],main = names(my_data[ix]) )
+  }
+    
+
+  
+    
+```
+
+
+#Data Visualization
+These graphs show the graph representation of Heating Load vs Cooling Load, Relative Compactness vs Surface Area, Relative Compactness vs Heating Load  and Relative Compactness vs Cooling Load .
+A correlation test has also been performed to determine the linear relationship between Relative Compactness  and Heating Load as well as Relative Compactness and Cooling Load
+
+```{r Data correlations, echo=FALSE}
+
+
+
+for (ix in c(2:5,7:10)) {
+  z<-cor(my_data[,1],my_data[,ix])
+  x<-names(my_data)[ix]
+  message("The correlation of Relative compactness with ",x," is ",z,sep = "  ")
+  
+}
+
+for (ix in c(3:5,7:10)) {
+  z<-cor(my_data[,2],my_data[,ix])
+  x<-names(my_data)[ix]
+  message("The correlation of Surface Area with ",x," is ",z,sep = "  ")
+  
+}
+
+for (ix in c(4:5,7:10)) {
+  z<-cor(my_data[,3],my_data[,ix])
+  x<-names(my_data)[ix]
+  message("The correlation of Wall Area with ",x," is ",z,sep = "  ")
+  
+}
+
+for (ix in c(5,7:10)) {
+  z<-cor(my_data[,4],my_data[,ix])
+  x<-names(my_data)[ix]
+  message("The correlation of Roof Area with ",x," is ",z,sep = "  ")
+  
+}
+
+for (ix in 7:10) {
+  z<-cor(my_data[,5],my_data[,ix])
+  x<-names(my_data)[ix]
+  message("The correlation of Overall Height with ",x," is ",z,sep = "  ")
+  
+}
+
+for (ix in 8:10) {
+  z<-cor(my_data[,7],my_data[,ix])
+  x<-names(my_data)[ix]
+  message("The correlation of Glazing Area with ",x," is ",z,sep = "  ")
+  
+}
+
+for (ix in 9:10) {
+    z<-cor(my_data[,8],my_data[,ix])
+  x<-names(my_data)[ix]
+  message("The correlation of Glazing Area Distribution with ",x," is ",z,sep = "  ")
+  
+}
+
+ix=10
+  z<-cor(my_data[,9],my_data[,ix])
+  x<-names(my_data)[ix]
+  message("The correlation of Heating Load with ",x," is ",z,sep = "  ")
+  
+
+
+
+
+
+
+```
+##Results 
+
+-We mapped a simple model with the data which held the highest correlation to both heating and cooling load, overall height. However, we decided it would be best to create a more complex model with a smaller mean prediction error. 
+
+-Model Selection was done by backward elimination where we took out insignificant predictors until only significant ones were left. Moreover, anova tables were made to get a better idea of the modelling effort. 
+
+CODE BLOCKS FOR PLOTS WITH EXPLANATION:
+
+*plot(my_data$Overall_Height,my_data$Cooling_Load);abline(lm(my_data$Cooling_Load~my_data$Overall_Height,data = my_data))*
+This chunk of code first plotted overall height on the x-axis with cooling load on the y-axis. Then, the fitted model for these variables was added via the abline function. Note, a similar approach was taken for plotting the simple heating-load model. 
+
+*plot(predvals.cool.4, main = "BlackPredvals vs RedObserved");points(my_data$Cooling_Load,col="red")*
+This chunk of code plots the predicted values of the final model in black. The points function places the actual values of the cooling load over the predicted values, in red. This method of visualization was also used to visualize the predicted vs observed values of the heating-load model.
+
+*ggplot(my_data, aes(x=my_data$Relative_Compactness,y=my_data$Heating_* *Load, fill=my_data$Wall_Area,* *color=my_data$Overall_Height,size=my_data$Glazing_Area^2, alpha* *=my_data$Glazing_Area_Distribution)) +  geom_point(shape=21,* *alpha=2)+**scale_color_gradient(low="purple", high="yellow")* *+scale_size_continuous(range=c(1,12.5))*
+This plotting method is mentally intensive to interpret and was done solely for demonstration purposes. It maps a scatter plot of all of the variables with the outcome (heating-load in this case) on the y-axis. Other predictor variables aside from relative compactness were expressed via the aes function. Note, the heating-load model contained 5 predictor variables while the cooling-load had 4 predictor variables. This difference is expressed in the added predictor *Glazing Area Distribution* to the model for heating-load. A similar approach to visualizing the full scatter plot of the data was taken for mapping cooling-load. 
+
+
+```{r Statistical Modeling, echo=FALSE}
+require(ggplot2)
+
+#simple models
+lmmodel.cool <- lm(my_data$Cooling_Load~my_data$Overall_Height,data = my_data)
+summary(lmmodel.cool)
+anova(lmmodel.cool)
+predvals.cool<-predict(lmmodel.cool)
+mean(abs(my_data$Cooling_Load-predvals.cool)) #check for prediction error
+plot(my_data$Overall_Height,my_data$Cooling_Load);abline(lm(my_data$Cooling_Load~my_data$Overall_Height,data = my_data))
+plot(lmmodel.cool)
+
+lmmodel.heat<- lm(formula = my_data$Heating_Load ~my_data$Overall_Height, data=my_data)
+summary(lmmodel.heat)
+anova(lmmodel.heat)
+predvals.heat<-predict(lmmodel.heat)
+mean(abs(my_data$Heating_Load-predvals.heat)) #check for prediction error
+plot(my_data$Overall_Height,my_data$Heating_Load);abline(lm(my_data$Heating_Load~my_data$Overall_Height,data = my_data))
+#although these two models are simple, they may not give the best prediction error and therefore we will search for a better model 
+
+#Model selection for heat prediction using backward selection
+#next model
+lmmodel.full.heat<-lm(formula = my_data$Heating_Load~my_data$Relative_Compactness+my_data$Surface_Area+my_data$Wall_Area+my_data$Roof_Area+my_data$Overall_Height+my_data$Orientation+my_data$Glazing_Area+my_data$Glazing_Area_Distribution,data = my_data)
+summary(lmmodel.full.heat) 
+anova(lmmodel.full.heat)
+predvals.heatfull<-predict(lmmodel.full.heat)
+mean(abs(my_data$Heating_Load-predvals.heatfull)) #check for prediction error
+
+##orientation has no significant effect and we will remove it from our model first
+
+lm.heat.3<-lm(formula = my_data$Heating_Load~my_data$Relative_Compactness+my_data$Surface_Area+my_data$Wall_Area+my_data$Roof_Area+my_data$Overall_Height+my_data$Glazing_Area+my_data$Glazing_Area_Distribution,data = my_data)
+summary(lm.heat.3)
+anova(lm.heat.3)
+predvals.heat3<-predict(lm.heat.3)
+mean(abs(my_data$Heating_Load-predvals.heat3)) #check for prediction error
+
+## remove roof area next
+
+lm.heat.4<-lm(formula = my_data$Heating_Load~my_data$Relative_Compactness+my_data$Surface_Area+my_data$Wall_Area+my_data$Overall_Height+my_data$Glazing_Area+my_data$Glazing_Area_Distribution,data = my_data)
+summary(lm.heat.4)
+anova(lm.heat.4)
+predvals.heat4<-predict(lm.heat.4)
+mean(abs(my_data$Heating_Load-predvals.heat4)) #check for mean prediction error
+
+#remove one from a pair of variables which have a high correlation with eachother
+#remove surface area from model
+
+lm.heat.5<-lm(formula = my_data$Heating_Load~my_data$Relative_Compactness+my_data$Wall_Area+my_data$Overall_Height+my_data$Glazing_Area+my_data$Glazing_Area_Distribution,data = my_data)
+summary(lm.heat.5)
+anova(lm.heat.5)
+predvals.heat5<-predict(lm.heat.5)
+mean(abs(my_data$Heating_Load-predvals.heat5))
+
+##all of our variables are significant here and we will therefore keep the model
+
+
+#visualization
+plot(predvals.heat5, main = "BlackPredvals vs RedObserved");points(my_data$Heating_Load,col="red")
+
+plot(lm.heat.5)
+
+
+ggplot(my_data, aes(x=my_data$Relative_Compactness, y=my_data$Heating_Load, fill=my_data$Wall_Area, color=my_data$Overall_Height, size=my_data$Glazing_Area^2, alpha = my_data$Glazing_Area_Distribution)) +
+  geom_point(shape=21, alpha=2) +
+  scale_color_gradient(low="purple", high="yellow") +
+  scale_size_continuous(range=c(1,12.5))+
+theme(panel.background = element_rect(fill = "white"),
+  plot.margin = margin(1, 1, 1, 1),
+  plot.background = element_rect(
+    fill = "grey90",
+    colour = "black",
+    size = 1
+  )
+)
+  
+######################################################################
+
+
+#model selectin for cooling 
+#we start the first model off minus roofing area bc it is insignificant 
+
+lmmodel.full.cool<-lm(formula = my_data$Cooling_Load~my_data$Relative_Compactness+my_data$Surface_Area+my_data$Wall_Area+my_data$Overall_Height+my_data$Orientation+my_data$Glazing_Area+my_data$Glazing_Area_Distribution,data = my_data)
+summary(lmmodel.full.cool) 
+anova(lmmodel.full.cool)
+predvals.hcoolfull<-predict(lmmodel.full.cool)
+mean(abs(my_data$Cooling_Load-predvals.hcoolfull)) #check for mean prediction error
+
+#remove orientation from model
+
+lm.cool.2<-lm(formula = my_data$Cooling_Load~my_data$Relative_Compactness+my_data$Surface_Area+my_data$Wall_Area+my_data$Overall_Height+my_data$Glazing_Area+my_data$Glazing_Area_Distribution,data = my_data)
+summary(lm.cool.2)
+anova(lm.cool.2)
+predvals.cool.2<-predict(lm.cool.2)
+mean(abs(my_data$Cooling_Load-predvals.cool.2)) #check for mean prediction error
+
+#remove glazing area distribution
+lm.cool.3<-lm(formula = my_data$Cooling_Load~my_data$Relative_Compactness+my_data$Surface_Area+my_data$Wall_Area+my_data$Overall_Height+my_data$Glazing_Area,data = my_data)
+summary(lm.cool.3)
+anova(lm.cool.3)
+predvals.cool.3<-predict(lm.cool.3)
+mean(abs(my_data$Cooling_Load-predvals.cool.3)) #slightly better prediction error 2.247922
+
+
+#remove one from a pair of variables which have a high correlation with eachother
+#remove surface area from model
+
+lm.cool.4<-lm(formula = my_data$Cooling_Load~my_data$Relative_Compactness+my_data$Wall_Area+my_data$Overall_Height+my_data$Glazing_Area,data = my_data)
+summary(lm.cool.4)
+anova(lm.cool.4)
+predvals.cool.4<-predict(lm.cool.4)
+mean(abs(my_data$Cooling_Load-predvals.cool.4)) #slightly better prediction error 2.292996
+
+
+
+#visualization
+plot(predvals.cool.4,main = "BlackPredvals vs RedObserved");points(my_data$Cooling_Load,col="red")
+plot(lm.cool.4)
+
+
+ggplot(my_data, aes(x=my_data$Relative_Compactness, y=my_data$Cooling_Load, fill=my_data$Wall_Area, color=my_data$Overall_Height, size=my_data$Glazing_Area^2)) +
+  geom_point(shape=21) +
+  scale_color_gradient(low="purple", high="yellow") +
+  scale_size_continuous(range=c(1,12.5))+
+  theme(panel.background = element_rect(fill = "white"),
+  plot.margin = margin(1, 1, 1, 1),
+  plot.background = element_rect(
+    fill = "grey90",
+    colour = "black",
+    size = 1
+  )
+)
+  
+
+
+```
+
+
+##Discussion
+
+  Our results point to our models being reliable for predicting cooling-load and heating-load. We suspect however that a drawback to our data-set may have been incurred by poor data collection efforts. We suspect this poor data collection effort led to a lack of variation in some of the predictor variables. For example, there are only 2 unique building heights across 768 observations. 
+  This being said, our initial hypothesis was correct. Our initial hypothesis is validated by our R-squared values; the model for cooling-load has an R-sq of 0.884 2 and the model for heating-load has an R-sq of .9133. 
+  Also, it is worth noting that the predicition error for each model was best for the full models. However, prediction error had a minor change from the full model to the final-reduced model for each outcome. Prediction error changes from full to reduced models for heat and cooling load are 2.1699-2.0673 and 2.293-2.247 respectively with the reduced model prediction error being represented by the first variable in each comparison. 
+  
+
