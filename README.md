@@ -1,5 +1,8 @@
 # Heat-and-Cooling-Load-Analysis
 
+## Purpose
+This Group Project was done in April 2019
+
 ## Shapiro Wilk Test for Normality
 ```Markdown
 Heating_Load Cooling_Load
@@ -259,3 +262,34 @@ The correlation of Glazing Area Distribution with Heating_Load is 0.087368459629
 The correlation of Glazing Area Distribution with Cooling_Load is 0.0505251188056757  
 The correlation of Heating Load with Cooling_Load is 0.975861739143769  
 ```
+
+```Markdown
+Coefficients:
+                               Estimate Std. Error t value Pr(>|t|)    
+(Intercept)                    0.367598   2.921165   0.126 0.899892    
+my_data$Relative_Compactness -19.996672   3.369180  -5.935 4.45e-09 ***
+my_data$Wall_Area              0.018562   0.004776   3.887 0.000111 ***
+my_data$Overall_Height         5.736372   0.207608  27.631  < 2e-16 ***
+my_data$Glazing_Area          14.817971   0.879566  16.847  < 2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 3.245 on 763 degrees of freedom
+Multiple R-squared:  0.8842,	Adjusted R-squared:  0.8836 
+F-statistic:  1457 on 4 and 763 DF,  p-value: < 2.2e-16
+
+Analysis of Variance Table
+
+Response: my_data$Cooling_Load
+                              Df  Sum Sq Mean Sq F value    Pr(>F)    
+my_data$Relative_Compactness   1 27931.9 27931.9 2652.32 < 2.2e-16 ***
+my_data$Wall_Area              1 22419.6 22419.6 2128.88 < 2.2e-16 ***
+my_data$Overall_Height         1  8040.1  8040.1  763.46 < 2.2e-16 ***
+my_data$Glazing_Area           1  2988.9  2988.9  283.82 < 2.2e-16 ***
+Residuals                    763  8035.3    10.5                      
+---
+```
+## Conclusion
+  Our results point to our models being reliable for predicting cooling-load and heating-load. We suspect however that a drawback to our data-set may have been incurred by poor data collection efforts. We suspect this poor data collection effort led to a lack of variation in some of the predictor variables. For example, there are only 2 unique building heights across 768 observations. 
+  This being said, our initial hypothesis was correct. Our initial hypothesis is validated by our R-squared values; the model for cooling-load has an R-sq of 0.884 2 and the model for heating-load has an R-sq of .9133. 
+  Also, it is worth noting that the predicition error for each model was best for the full models. However, prediction error had a minor change from the full model to the final-reduced model for each outcome. Prediction error changes from full to reduced models for heat and cooling load are 2.1699-2.0673 and 2.293-2.247 respectively with the reduced model prediction error being represented by the first variable in each comparison.
