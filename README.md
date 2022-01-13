@@ -1,7 +1,7 @@
 # Heat-and-Cooling-Load-Analysis
 
 ## Purpose
-This Group Project was done in April 2019
+This Project served as a Final Group Project contributed by Dione David, Jeff Wittenburg, and Jose Luis Del Valle Jr. The purpose for choosing this dataset was to work on Data Analysis and building a linear Model that would serve for the prediction of Heating and Cooling Loads within city buildings. Given certain features, we preformed data-processing,hypothesis test, normality tests and predictive modeling.
 
 ## Shapiro Wilk Test for Normality
 ```Markdown
@@ -223,7 +223,7 @@ Normality test for Revised variables Cooling_Load
 data:  (revised.heat_load.dat[, ix])
 W = 0.92496, p-value = 6.018e-13
 ```
-## Correlation for each feature.
+## Bi Variate Correlation for each feature.
 ```Markdown
 The correlation of Relative compactness with Surface_Area is -0.991901461613886  
 The correlation of Relative compactness with Wall_Area is -0.203781680321038  
@@ -290,6 +290,6 @@ Residuals                    763  8035.3    10.5
 ---
 ```
 ## Conclusion
-  Our results point to our models being reliable for predicting cooling-load and heating-load. We suspect however that a drawback to our data-set may have been incurred by poor data collection efforts. We suspect this poor data collection effort led to a lack of variation in some of the predictor variables. For example, there are only 2 unique building heights across 768 observations. 
+  Our results point to our models being reliable for predicting cooling-load and heating-load. We suspect however that drawbacks to our data-set may have been incurred by poor data collection efforts. We suspect this poor data collection effort led to a lack of variation in some of the predictor variables. For example, there are only 2 unique building heights across 768 observations. 
   This being said, our initial hypothesis was correct. Our initial hypothesis is validated by our R-squared values; the model for cooling-load has an R-sq of 0.884 2 and the model for heating-load has an R-sq of .9133. 
   Also, it is worth noting that the predicition error for each model was best for the full models. However, prediction error had a minor change from the full model to the final-reduced model for each outcome. Prediction error changes from full to reduced models for heat and cooling load are 2.1699-2.0673 and 2.293-2.247 respectively with the reduced model prediction error being represented by the first variable in each comparison.
