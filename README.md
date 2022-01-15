@@ -92,13 +92,6 @@ These simple graphs were created to get a glimpse of what the data looks like. i
 ![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/corr_scatterplot_matrix.png)
 
 
-
-![]()
-![]()
-![]()
-![]()
-
-
 ## Bi-Variate Analysis for each feature.
 ```Markdown
 The correlation of Relative compactness with Surface_Area is -0.991901461613886  
@@ -166,6 +159,7 @@ my_data$Glazing_Area           1  2988.9  2988.9  283.82 < 2.2e-16 ***
 Residuals                    763  8035.3    10.5                      
 ---
 ```
+
 ![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/cool_norm_qq.png)
 ![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/cool_pred_vs_actual.png)
 ![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/cooling_load_multivar_regress.png)
