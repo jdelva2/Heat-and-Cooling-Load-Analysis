@@ -43,12 +43,6 @@ Normality test for  Glazing_Area
 data:  my_data[, ix]
 W = 0.84349, p-value < 2.2e-16
 
-Normality test for  Glazing_Area_Distribution
-	Shapiro-Wilk normality test
-
-data:  my_data[, ix]
-W = 0.91551, p-value < 2.2e-16
-
 Normality test for  Heating_Load
 	Shapiro-Wilk normality test
 
@@ -79,156 +73,31 @@ Normality test for log converted Wall_Area
 data:  log(my_data[, ix])
 W = 0.94216, p-value < 2.2e-16
 
-Normality test for log converted Roof_Area
-	Shapiro-Wilk normality test
 
-data:  log(my_data[, ix])
-W = 0.76583, p-value < 2.2e-16
-
-Normality test for log converted Overall_Height
-	Shapiro-Wilk normality test
-
-data:  log(my_data[, ix])
-W = 0.63658, p-value < 2.2e-16
-
-Normality test for log converted Glazing_Area
-	Shapiro-Wilk normality test
-
-data:  log(my_data[, ix])
-W = NaN, p-value = NA
-
-Normality test for log converted Glazing_Area_Distribution
-	Shapiro-Wilk normality test
-
-data:  log(my_data[, ix])
-W = NaN, p-value = NA
-
-Normality test for log converted Heating_Load
-	Shapiro-Wilk normality test
-
-data:  log(my_data[, ix])
-W = 0.9328, p-value < 2.2e-16
-
-Normality test for log converted Cooling_Load
-	Shapiro-Wilk normality test
-
-data:  log(my_data[, ix])
-W = 0.9191, p-value < 2.2e-16
-
-Normality test for Revised variables Relative_Compactness
-	Shapiro-Wilk normality test
-
-data:  (revised.cool_load.dat[, ix])
-W = 0.88914, p-value = 4.807e-16
-
-Normality test for Revised variables Surface_Area
-	Shapiro-Wilk normality test
-
-data:  (revised.cool_load.dat[, ix])
-W = 0.89131, p-value = 7.036e-16
-
-Normality test for Revised variables Wall_Area
-	Shapiro-Wilk normality test
-
-data:  (revised.cool_load.dat[, ix])
-W = 0.92068, p-value = 2.301e-13
-
-Normality test for Revised variables Roof_Area
-	Shapiro-Wilk normality test
-
-data:  (revised.cool_load.dat[, ix])
-W = 0.75014, p-value < 2.2e-16
-
-Normality test for Revised variables Overall_Height
-	Shapiro-Wilk normality test
-
-data:  (revised.cool_load.dat[, ix])
-W = 0.63652, p-value < 2.2e-16
-
-Normality test for Revised variables Glazing_Area
-	Shapiro-Wilk normality test
-
-data:  (revised.cool_load.dat[, ix])
-W = 0.82739, p-value < 2.2e-16
-
-Normality test for Revised variables Glazing_Area_Distribution
-	Shapiro-Wilk normality test
-
-data:  (revised.cool_load.dat[, ix])
-W = 0.91705, p-value = 1.046e-13
-
-Normality test for Revised variables Heating_Load
-	Shapiro-Wilk normality test
-
-data:  (revised.cool_load.dat[, ix])
-W = 0.89673, p-value = 1.873e-15
-
-Normality test for Revised variables Cooling_Load
-	Shapiro-Wilk normality test
-
-data:  (revised.cool_load.dat[, ix])
-W = 0.88614, p-value = 2.859e-16
-
-Normality test for Revised variables Relative_Compactness
-	Shapiro-Wilk normality test
-
-data:  (revised.heat_load.dat[, ix])
-W = 0.89144, p-value = 7.209e-16
-
-Normality test for Revised variables Surface_Area
-	Shapiro-Wilk normality test
-
-data:  (revised.heat_load.dat[, ix])
-W = 0.88888, p-value = 4.593e-16
-
-Normality test for Revised variables Wall_Area
-	Shapiro-Wilk normality test
-
-data:  (revised.heat_load.dat[, ix])
-W = 0.93094, p-value = 2.464e-12
-
-Normality test for Revised variables Roof_Area
-	Shapiro-Wilk normality test
-
-data:  (revised.heat_load.dat[, ix])
-W = 0.75036, p-value < 2.2e-16
-
-Normality test for Revised variables Overall_Height
-	Shapiro-Wilk normality test
-
-data:  (revised.heat_load.dat[, ix])
-W = 0.63652, p-value < 2.2e-16
-
-Normality test for Revised variables Glazing_Area
-	Shapiro-Wilk normality test
-
-data:  (revised.heat_load.dat[, ix])
-W = 0.83164, p-value < 2.2e-16
-
-Normality test for Revised variables Glazing_Area_Distribution
-	Shapiro-Wilk normality test
-
-data:  (revised.heat_load.dat[, ix])
-W = 0.91699, p-value = 1.032e-13
-
-Normality test for Revised variables Heating_Load
-	Shapiro-Wilk normality test
-
-data:  (revised.heat_load.dat[, ix])
-W = 0.86468, p-value < 2.2e-16
-
-Normality test for Revised variables Cooling_Load
-	Shapiro-Wilk normality test
-
-data:  (revised.heat_load.dat[, ix])
-W = 0.92496, p-value = 6.018e-13
 ```
-# Barplots
+## Box-Whisker Plots & Barplots
+![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/relative_compactness_box_whsk.png)
+![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/surface_area_box_whsk.png)
 ![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/cool_load_barplot.png)
 ![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/heat_load_barplot.png)
+![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/wall_area_barplot.png)
+
+# 
+![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/relative_compactness_linear_model.png)
+![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/surface_area_linear_model.png)
+
+## Multi Bi-variate Analysis with scatterplot matrix
+![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/corr_scatterplot_matrix.png)
 
 
-## Bi Variate Correlation for each feature.
+
+![]()
+![]()
+![]()
+![]()
+
+
+## Bi-Variate Analysis for each feature.
 ```Markdown
 The correlation of Relative compactness with Surface_Area is -0.991901461613886  
 The correlation of Relative compactness with Wall_Area is -0.203781680321038  
@@ -268,6 +137,7 @@ The correlation of Glazing Area Distribution with Cooling_Load is 0.050525118805
 The correlation of Heating Load with Cooling_Load is 0.975861739143769  
 ```
 
+## Multivariate Regression
 ```Markdown
 Coefficients:
                                Estimate Std. Error t value Pr(>|t|)    
@@ -294,6 +164,15 @@ my_data$Glazing_Area           1  2988.9  2988.9  283.82 < 2.2e-16 ***
 Residuals                    763  8035.3    10.5                      
 ---
 ```
+![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/cool_norm_qq.png)
+![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/cool_pred_vs_actual.png)
+![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/cooling_load_multivar_regress.png)
+![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/heat_norm_qq.png)
+![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/heat_pred_vs_actual.png)
+![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/heating_load_multivar_regress.png)
+
+
+
 ## Conclusion
   Our results point to our models being reliable for predicting cooling-load and heating-load. We suspect however that drawbacks to our data-set may have been incurred by poor data collection efforts. We suspect this poor data collection effort led to a lack of variation in some of the predictor variables. For example, there are only 2 unique building heights across 768 observations. 
   This being said, our initial hypothesis was correct. Our initial hypothesis is validated by our R-squared values; the model for cooling-load has an R-sq of 0.884 2 and the model for heating-load has an R-sq of .9133. 
