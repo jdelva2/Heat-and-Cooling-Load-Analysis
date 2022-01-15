@@ -78,18 +78,18 @@ W = 0.94216, p-value < 2.2e-16
 ## Box-Whisker Plots & Barplots
 These simple graphs were created to get a glimpse of what the data looks like. i.e does the data follow a normal distribution? What does the IQR, median, and range look like?
 
-![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/relative_compactness_box_whsk.png)
-![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/surface_area_box_whsk.png)
+![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/relative_compactness_box_whsk.png?raw=true)
+![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/surface_area_box_whsk.png?raw=true)
 ![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/cool_load_barplot.png?raw=true)
-![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/heat_load_barplot.png)
-![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/wall_area_barplot.png)
+![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/heat_load_barplot.png?raw=true)
+![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/wall_area_barplot.png?raw=true)
 
  
-![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/relative_compactness_linear_model.png)
-![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/surface_area_linear_model.png)
+![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/relative_compactness_linear_model.png?raw=true)
+![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/surface_area_linear_model.png?raw=true)
 
 ## Multi Bi-variate Analysis with scatterplot matrix
-![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/corr_scatterplot_matrix.png)
+![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/corr_scatterplot_matrix.png?raw=true)
 
 
 ## Bi-Variate Analysis for each feature.
@@ -160,12 +160,12 @@ Residuals                    763  8035.3    10.5
 ---
 ```
 
-![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/cool_norm_qq.png?raw=True)
-![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/cool_pred_vs_actual.png)
-![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/cooling_load_multivar_regress.png)
-![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/heat_norm_qq.png)
-![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/heat_pred_vs_actual.png)
-![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/heating_load_multivar_regress.png)
+![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/cool_norm_qq.png?raw=true)
+![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/cool_pred_vs_actual.png?raw=true)
+![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/cooling_load_multivar_regress.png?raw=true)
+![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/heat_norm_qq.png?raw=true)
+![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/heat_pred_vs_actual.png?raw=true)
+![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/heating_load_multivar_regress.png?raw=true)
 
 
 
