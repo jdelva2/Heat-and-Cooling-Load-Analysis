@@ -223,6 +223,11 @@ Normality test for Revised variables Cooling_Load
 data:  (revised.heat_load.dat[, ix])
 W = 0.92496, p-value = 6.018e-13
 ```
+# Barplots
+![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/cool_load_barplot.png)
+![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/heat_load_barplot.png)
+
+
 ## Bi Variate Correlation for each feature.
 ```Markdown
 The correlation of Relative compactness with Surface_Area is -0.991901461613886  
