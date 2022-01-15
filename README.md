@@ -1,7 +1,7 @@
 # Heat-and-Cooling-Load-Analysis
 
 ## Purpose
-This Project served as a Final Group Project contributed by Dione David, Jeff Wittenburg, and Jose Luis Del Valle Jr. The purpose for choosing this dataset was to work on Data Analysis and building a linear Model that would serve for the prediction of Heating and Cooling Loads within city buildings. Given certain features, we preformed data-processing,hypothesis test, normality tests and predictive modeling.
+This Project served as a Final Group Project contributed by Dione David, Jeff Wittenburg, and Jose Luis Del Valle Jr. The purpose for choosing this dataset was to work on Data Analysis and building a linear Model that would serve for the prediction of Heating and Cooling Loads within city buildings. Given certain features, we preformed data-processing,hypothesis test, normality tests, Bivariate correlations and predictive modeling.
 
 ## Shapiro Wilk Test for Normality
 ```Markdown
