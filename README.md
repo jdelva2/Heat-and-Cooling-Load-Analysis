@@ -160,7 +160,7 @@ Residuals                    763  8035.3    10.5
 ---
 ```
 
-![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/cool_norm_qq.png)
+![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/cool_norm_qq.png?raw=True)
 ![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/cool_pred_vs_actual.png)
 ![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/cooling_load_multivar_regress.png)
 ![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/heat_norm_qq.png)
