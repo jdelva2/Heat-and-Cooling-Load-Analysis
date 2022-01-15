@@ -84,7 +84,7 @@ These simple graphs were created to get a glimpse of what the data looks like. i
 ![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/heat_load_barplot.png)
 ![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/wall_area_barplot.png)
 
-# # 
+ 
 ![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/relative_compactness_linear_model.png)
 ![](https://github.com/jdelva2/Heat-and-Cooling-Load-Analysis/blob/main/Plots%20and%20Graph%20Results/surface_area_linear_model.png)
 
